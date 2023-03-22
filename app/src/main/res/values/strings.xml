@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Calorie Counter</string>
+    <string name="height">Tinggi Badan(cm)</string>
+    <string name="weight">Berat Badan(kg)</string>
+    <string name="gender">Jenis Kelamin</string>
+    <string name="man">Pria</string>
+    <string name="woman">Wanita</string>
+    <string name="intro">Skor BMI Kamu</string>
 </resources>
