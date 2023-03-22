@@ -1,9 +1,25 @@
 <resources>
     <string name="app_name">Calorie Counter</string>
+
+    <!--input field-->
     <string name="height">Tinggi Badan(cm)</string>
     <string name="weight">Berat Badan(kg)</string>
     <string name="gender">Jenis Kelamin</string>
+
+    <!--value-->
     <string name="man">Pria</string>
     <string name="woman">Wanita</string>
+    <string name="score">20</string>
+    <string name="underweight">Kurus</string>
+    <string name="ideal">Ideal</string>
+    <string name="overweight">Gemuk</string>
+    <string name="obese">Obesitas</string>
+    <string name="mealName">Nama Makanan</string>
+
+
+    <!--text-->
+    <string name="calculate">Hitung</string>
     <string name="intro">Skor BMI Kamu</string>
+    <string name="recommendations">Rekomendasi Menu Makanan</string>
+
 </resources>
