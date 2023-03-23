@@ -30,7 +30,7 @@
             android:id="@+id/heightInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/height"/>
+            android:hint="@string/height"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -45,7 +45,7 @@
             android:id="@+id/weightInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/height"/>
+            android:hint="@string/weight"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
@@ -73,13 +73,13 @@
         app:layout_constraintStart_toEndOf="@id/genderTextView"
         app:layout_constraintBottom_toBottomOf="@id/genderTextView">
         <RadioButton
-            android:id="@+id/genderManRB"
+            android:id="@+id/manRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/man"/>
         <RadioButton
-            android:id="@+id/genderWomanRB"
+            android:id="@+id/womanRadioButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -94,5 +94,41 @@
         app:layout_constraintTop_toBottomOf="@id/genderRadioGroup"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/calculateButton" />
+
+    <TextView
+        android:id="@+id/bmiTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        tools:text="BMI: 24,09" />
+
+    <TextView
+        android:id="@+id/kategoriTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/bmiTextView"
+        tools:text="Kategori: Ideal" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -14,6 +14,11 @@
     <string name="ideal">Ideal</string>
     <string name="overweight">Gemuk</string>
     <string name="obese">Obesitas</string>
+    <string name="weight_invalid">Berat tidak boleh kosong</string>
+    <string name="height_invalid">Tinggi tidak boleh kosong</string>
+    <string name="gender_invalid">Gender tidak boleh kosong</string>
+    <string name="bmi_x">BMI: %1$.2f</string>
+    <string name="category_x">Kategori: %1$s</string>
     <string name="mealName">Nama Makanan</string>
     <string name="mealMacro">500 kalori</string>
 
