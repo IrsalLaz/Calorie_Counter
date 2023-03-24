@@ -1,5 +1,6 @@
 package org.lazlab.caloriecounter
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
@@ -15,16 +16,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        gunakan class MainAdapter.kt pada MainActivity.kt
-
         binding.calculateButton.setOnClickListener { hitungBmi() }
-    }
-
-    private fun getData(): List<Meals> {
-        return listOf(
-            Meals("Ayam Teriyaki", 300.0, "ayam", "makanan enak mudah dibuat"),
-            Meals("Nasi Liwet", 600.0, "nasi, telur, ayam sewir", "makanan enak mudah dibuat"),
-        )
     }
 
     private fun hitungBmi() {
@@ -53,6 +45,13 @@ class MainActivity : AppCompatActivity() {
 
         binding.bmiTextView.text = getString(R.string.bmi_x, bmi)
         binding.kategoriTextView.text = getString(R.string.category_x, kategori)
+
+        toBmiPage()
+    }
+    
+    fun toBmiPage(){
+        val intent = Intent(this, BmiActivity::class.java)
+        startActivity(intent)
     }
 
     private fun getCategory(bmi: Float, isMale: Boolean): String {

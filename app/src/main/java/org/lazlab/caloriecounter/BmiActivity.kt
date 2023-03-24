@@ -2,17 +2,16 @@ package org.lazlab.caloriecounter
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import org.lazlab.caloriecounter.databinding.ActivityMainBinding
+import org.lazlab.caloriecounter.databinding.ActivityBmiBinding
 
-class BmiPage : AppCompatActivity() {
+class BmiActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityBmiBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityBmiBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
 
     }
 
