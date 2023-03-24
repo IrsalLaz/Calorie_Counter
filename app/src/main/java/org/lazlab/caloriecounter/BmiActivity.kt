@@ -13,6 +13,17 @@ class BmiActivity : AppCompatActivity() {
         binding = ActivityBmiBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        val bmiScore =  intent.getStringExtra("EXTRA_SCORE")
+        val bmiCategory =  intent.getStringExtra("EXTRA_CATEGORY")
+
+        binding.scoreTextView.apply {
+            text = bmiScore
+        }
+
+        binding.categoryTextView.apply {
+            text = bmiCategory
+        }
+
     }
 
     private fun getData(): List<Meals> {
@@ -21,4 +32,10 @@ class BmiActivity : AppCompatActivity() {
             Meals("Nasi Liwet", 600.0, "nasi, telur, ayam sewir", "makanan enak mudah dibuat"),
         )
     }
+
+//    fun showScore(){
+//        binding.scoreTextView.text = getString(R.string.bmi_x, bmi)
+//        binding.categoryTextView.text = getString(R.string.category_x, kategori)
+//
+//    }
 }

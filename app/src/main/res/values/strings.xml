@@ -9,7 +9,7 @@
     <!--value-->
     <string name="man">Pria</string>
     <string name="woman">Wanita</string>
-    <string name="score">20</string>
+    <string name="score">BMI: 20</string>
     <string name="underweight">Kurus</string>
     <string name="ideal">Ideal</string>
     <string name="overweight">Gemuk</string>
@@ -21,6 +21,7 @@
     <string name="category_x">Kategori: %1$s</string>
     <string name="mealName">Nama Makanan</string>
     <string name="mealMacro">500 kalori</string>
+    <string name="recalculate">Reset</string>
 
 
     <!--text-->

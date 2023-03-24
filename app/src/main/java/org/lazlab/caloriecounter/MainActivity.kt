@@ -16,22 +16,25 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.calculateButton.setOnClickListener { hitungBmi() }
+        binding.calculateButton.setOnClickListener { calculateBmi() }
+
+        binding.clearButton.setOnClickListener{ clearInput() }
+
     }
 
-    private fun hitungBmi() {
-        val berat = binding.weightInput.text.toString()
-        if (TextUtils.isEmpty(berat)) {
+    fun calculateBmi() {
+        val weight = binding.weightInput.text.toString()
+        if (TextUtils.isEmpty(weight)) {
             Toast.makeText(this, R.string.weight_invalid, Toast.LENGTH_LONG).show()
             return
         }
 
-        val tinggi = binding.heightInput.text.toString()
-        if (TextUtils.isEmpty(tinggi)) {
+        val height = binding.heightInput.text.toString()
+        if (TextUtils.isEmpty(height)) {
             Toast.makeText(this, R.string.height_invalid, Toast.LENGTH_LONG).show()
             return
         }
-        val tinggiCm = tinggi.toFloat() / 100
+        val heightCm = height.toFloat() / 100
 
         val selectdId = binding.genderRadioGroup.checkedRadioButtonId
         if (selectdId == -1) {
@@ -40,21 +43,29 @@ class MainActivity : AppCompatActivity() {
         }
 
         val isMale = selectdId == R.id.manRadioButton
-        val bmi = berat.toFloat() / (tinggiCm * tinggiCm)
-        val kategori = getCategory(bmi, isMale)
+        val bmi = weight.toFloat() / (heightCm * heightCm)
+        val category = getCategory(bmi, isMale)
 
-        binding.bmiTextView.text = getString(R.string.bmi_x, bmi)
-        binding.kategoriTextView.text = getString(R.string.category_x, kategori)
+        //send score & category to bmiActivity
+        val scoreBmi = getString(R.string.bmi_x, bmi)
+        val categoryBmi = getString(R.string.category_x, category)
 
-        toBmiPage()
+
+        val intent = Intent(this, BmiActivity::class.java).also {
+            it.putExtra("EXTRA_SCORE", scoreBmi)
+            it.putExtra("EXTRA_CATEGORY", categoryBmi)
+            startActivity(it)
+        }
     }
-    
-    fun toBmiPage(){
-        val intent = Intent(this, BmiActivity::class.java)
-        startActivity(intent)
+
+    fun clearInput(){
+        //resetting input field
+        binding.heightInput.text?.clear()
+        binding.weightInput.text?.clear()
+        binding.genderRadioGroup.clearCheck()
     }
 
-    private fun getCategory(bmi: Float, isMale: Boolean): String {
+    fun getCategory(bmi: Float, isMale: Boolean): String {
         val stringRes = if (isMale) {
             when {
                 bmi < 18.5 -> R.string.underweight
