@@ -5,15 +5,20 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".BmiActivity">
+    tools:context=".BmiActivity"
+
+    >
 
     <!--add textSize-->
+
     <TextView
-        android:id="@+id/introTextView"
+        android:id="@+id/categoryTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/intro"
+        android:text="@string/category_x"
+        android:textSize="18sp"
+        android:layout_marginTop="32dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -26,28 +31,39 @@
         android:text="@string/score"
         android:textSize="64sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/introTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/categoryTextView" />
 
     <TextView
-        android:id="@+id/categoryTextView"
+        android:id="@+id/introCalorieTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="@string/ideal"
+        android:text="@string/introCalorie"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/scoreTextView" />
+
+    <TextView
+        android:id="@+id/calorieTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/bmr"
+        android:textSize="64sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/introCalorieTextView" />
 
     <TextView
         android:id="@+id/mealsTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="16dp"
         android:text="@string/recommendations"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/categoryTextView" />
+        app:layout_constraintTop_toBottomOf="@id/calorieTextView" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@id/mealRecyclerView"
@@ -59,6 +75,5 @@
         app:layout_constraintTop_toBottomOf="@+id/mealsTextView"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/list_meals"/>
-
 
   </androidx.constraintlayout.widget.ConstraintLayout>

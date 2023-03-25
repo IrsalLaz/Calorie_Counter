@@ -2,9 +2,11 @@
     <string name="app_name">Calorie Counter</string>
 
     <!--input field-->
+    <string name="age">Usia</string>
     <string name="height">Tinggi Badan(cm)</string>
     <string name="weight">Berat Badan(kg)</string>
     <string name="gender">Jenis Kelamin</string>
+    <string name="activity">Aktivitas</string>
 
     <!--value-->
     <string name="man">Pria</string>
@@ -14,19 +16,27 @@
     <string name="ideal">Ideal</string>
     <string name="overweight">Gemuk</string>
     <string name="obese">Obesitas</string>
+    <string name="age_invalid">Usia tidak boleh kosong</string>
     <string name="weight_invalid">Berat tidak boleh kosong</string>
     <string name="height_invalid">Tinggi tidak boleh kosong</string>
     <string name="gender_invalid">Gender tidak boleh kosong</string>
+    <string name="activity_invalid">Aktivitas tidak boleh kosong</string>
     <string name="bmi_x">BMI: %1$.2f</string>
     <string name="category_x">Kategori: %1$s</string>
+    <string name="bmr_x">%1$s</string>
     <string name="mealName">Nama Makanan</string>
     <string name="mealMacro">500 kalori</string>
     <string name="recalculate">Reset</string>
+    <string name="never">Tidak Pernah</string>
+    <string name="rarely">Jarang</string>
+    <string name="often">Sering</string>
+    <string name="bmr">2900</string>
 
 
     <!--text-->
     <string name="calculate">Hitung</string>
     <string name="intro">Skor BMI Kamu</string>
+    <string name="introCalorie">Kebutuhan Kalori Kamu</string>
     <string name="recommendations">Rekomendasi Menu Makanan</string>
 
 </resources>
