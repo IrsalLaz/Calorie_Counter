@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
         binding.calculateButton.setOnClickListener { calculate() }
 
         binding.clearButton.setOnClickListener { clearInput() }
-
     }
 
     private fun calculate() {
@@ -59,23 +58,24 @@ class MainActivity : AppCompatActivity() {
         val bmi = weight.toFloat() / (heightCm * heightCm)
         val category = getCategory(bmi, isMale)
 
-        //CALCULATE BMR
-        val isNever = selectActivityLevel == R.id.neverRadioButton
-        val isRarely = selectActivityLevel == R.id.rarelyRadioButton
-        val isOften = selectActivityLevel == R.id.oftenRadioButton
-
-
-        val activityLevel = 1.2 // fix this
-
-        //isMale
-        val bmr =
-            ((88.4 + 13.4 * weight.toFloat()) + (4.8 * height.toFloat()) - (5.68 * age.toFloat())) * activityLevel
-
         //store & send score & category to bmiActivity
         val scoreBmi = getString(R.string.bmi_x, bmi)
         val categoryBmi = getString(R.string.category_x, category)
 
+        //CALCULATE BMR
+        val bmr= getBmr(isMale, weight.toFloat(), height.toFloat(), age.toFloat(), dailyActivity(selectActivityLevel))
+
         openActivity(scoreBmi, categoryBmi, bmr.toString())
+    }
+
+    private fun getBmr(isMale: Boolean, weight: Float, height: Float, age: Float, dailyActivity: Float): String{
+        val bmr: Float = if (isMale){
+            ((88.4f + 13.4f * weight) + (4.8f * height) - (5.68f * age)) * dailyActivity
+        } else{
+            ((447.6f + 9.25f * weight) + (3.10f * height) - (4.33f * age)) * dailyActivity
+        }
+
+        return  bmr.toString()
     }
 
     private fun getCategory(bmi: Float, isMale: Boolean): String {
@@ -97,11 +97,28 @@ class MainActivity : AppCompatActivity() {
         return getString(stringRes)
     }
 
+    private fun dailyActivity(selectActivityLevel: Int) : Float{
+        val index : Float = when (selectActivityLevel) {
+            R.id.oftenRadioButton -> {
+                1.4f
+            }
+            R.id.rarelyRadioButton -> {
+                1.3f
+            }
+            else -> {
+                1.2f
+            }
+        }
+        return index
+    }
+
     private fun clearInput() {
-        //resetting input field
+        //clear input field
+        binding.ageInput.text?.clear()
         binding.heightInput.text?.clear()
         binding.weightInput.text?.clear()
         binding.genderRadioGroup.clearCheck()
+        binding.activityRadioGroup.clearCheck()
     }
 
     private fun openActivity(score: String, category: String, calorie: String) {

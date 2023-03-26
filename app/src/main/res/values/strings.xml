@@ -21,17 +21,19 @@
     <string name="height_invalid">Tinggi tidak boleh kosong</string>
     <string name="gender_invalid">Gender tidak boleh kosong</string>
     <string name="activity_invalid">Aktivitas tidak boleh kosong</string>
+
     <string name="bmi_x">BMI: %1$.2f</string>
     <string name="category_x">Kategori: %1$s</string>
-    <string name="bmr_x">%1$s</string>
+    <string name="bmr_x">%1$.2f</string>
+
     <string name="mealName">Nama Makanan</string>
     <string name="mealMacro">500 kalori</string>
-    <string name="recalculate">Reset</string>
-    <string name="never">Tidak Pernah</string>
-    <string name="rarely">Jarang</string>
-    <string name="often">Sering</string>
-    <string name="bmr">2900</string>
 
+    <string name="reset">Reset</string>
+    <string name="never">Tidak Pernah Olahraga</string>
+    <string name="rarely">Jarang Olahraga</string>
+    <string name="often">Sering Olahraga</string>
+    <string name="bmr">2900</string>
 
     <!--text-->
     <string name="calculate">Hitung</string>

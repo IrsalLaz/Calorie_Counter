@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BmiActivity"
-
     >
 
     <!--add textSize-->
@@ -70,10 +69,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        tools:listitem="@layout/list_meals"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mealsTextView"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        tools:listitem="@layout/list_meals"/>
+        app:layout_constraintTop_toBottomOf="@+id/mealsTextView"
+        />
 
   </androidx.constraintlayout.widget.ConstraintLayout>

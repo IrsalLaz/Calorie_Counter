@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="8dp"
-    android:background="?android:selectableItemBackground"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="?android:selectableItemBackground">
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/mealCardView"
@@ -18,7 +18,7 @@
         android:checkable="true"
         android:clickable="true"
         android:focusable="true"
-        app:cardBackgroundColor="@color/purple_200"
+        app:cardBackgroundColor="@color/orange_100"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -34,7 +34,7 @@
                 android:layout_width="88dp"
                 android:layout_height="88dp"
                 android:contentDescription="@null"
-                android:src="@drawable/ic_launcher_background" />
+                android:src="@mipmap/buburayam" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -63,7 +63,6 @@
             </LinearLayout>
 
         </LinearLayout>
-
 
     </com.google.android.material.card.MaterialCardView>
 
