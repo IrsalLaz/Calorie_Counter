@@ -65,7 +65,7 @@ class MainActivity : AppCompatActivity() {
         //CALCULATE BMR
         val bmr= getBmr(isMale, weight.toFloat(), height.toFloat(), age.toFloat(), dailyActivity(selectActivityLevel))
 
-        openActivity(scoreBmi, categoryBmi, bmr.toString())
+        openActivity(scoreBmi, categoryBmi, bmr)
     }
 
     private fun getBmr(isMale: Boolean, weight: Float, height: Float, age: Float, dailyActivity: Float): String{
