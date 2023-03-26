@@ -24,7 +24,7 @@
 
     <string name="bmi_x">BMI: %1$.2f</string>
     <string name="category_x">Kategori: %1$s</string>
-    <string name="bmr_x">%1$.2f</string>
+    <string name="bmr_x">%1$.6s kalori</string>
 
     <string name="mealName">Nama Makanan</string>
     <string name="mealMacro">500 kalori</string>

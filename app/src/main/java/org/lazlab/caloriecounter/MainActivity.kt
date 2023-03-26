@@ -63,9 +63,10 @@ class MainActivity : AppCompatActivity() {
         val categoryBmi = getString(R.string.category_x, category)
 
         //CALCULATE BMR
-        val bmr= getBmr(isMale, weight.toFloat(), height.toFloat(), age.toFloat(), dailyActivity(selectActivityLevel))
+        val bmr = getBmr(isMale, weight.toFloat(), height.toFloat(), age.toFloat(), dailyActivity(selectActivityLevel))
 
-        openActivity(scoreBmi, categoryBmi, bmr)
+        val calorieIntake = getString(R.string.bmr_x, bmr)
+        openActivity(scoreBmi, categoryBmi, calorieIntake)
     }
 
     private fun getBmr(isMale: Boolean, weight: Float, height: Float, age: Float, dailyActivity: Float): String{
