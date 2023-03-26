@@ -3,7 +3,6 @@ package org.lazlab.caloriecounter
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import org.lazlab.caloriecounter.databinding.ActivityBmiBinding
 
@@ -42,15 +41,14 @@ class BmiActivity : AppCompatActivity() {
 
     private fun getData(): List<Meals> {
         return listOf(
-            Meals("Gado-gado:", 300.0),
-            Meals("Nasi goreng sayuran", 400.0),
-            Meals("Pepes ikan", 400.0),
-            Meals("Sayur lodeh", 250.0),
-            Meals("Sate ayam", 300.0),
-            Meals("Soto ayam", 300.0),
-            Meals("Sayur asam", 150.0),
-            Meals("Bubur ayam", 300.0),
+            Meals("Gado-gado:", 300.0, R.mipmap.gadogado),
+            Meals("Nasi goreng sayuran", 400.0, R.mipmap.nasigoreng),
+            Meals("Pepes ikan", 400.0, R.mipmap.pepesikan),
+            Meals("Sayur lodeh", 250.0, R.mipmap.sayurlodeh),
+            Meals("Sate ayam", 300.0, R.mipmap.sateayam),
+            Meals("Soto ayam", 300.0, R.mipmap.sotoayam),
+            Meals("Sayur asam", 150.0, R.mipmap.sayurasem),
+            Meals("Bubur ayam", 300.0, R.mipmap.buburayam),
         )
     }
-
 }

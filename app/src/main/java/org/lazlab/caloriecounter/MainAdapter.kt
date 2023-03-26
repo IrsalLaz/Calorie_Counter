@@ -13,6 +13,7 @@ class MainAdapter(private val data: List<Meals>) :
         fun bind(meal: Meals) = with(binding){
             mealNameTextView.text = meal.name
             calorieTextView.text= meal.calorie.toString()
+            mealImageView.setImageResource(meal.imageResId)
         }
     }
 
