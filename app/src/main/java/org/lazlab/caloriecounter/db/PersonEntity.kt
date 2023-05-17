@@ -7,10 +7,10 @@ import androidx.room.PrimaryKey
 data class PersonEntity(
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0L,
-    var date : Long = System.currentTimeMillis(),
+    var date: Long = System.currentTimeMillis(),
     var weight: Float,
     var height: Float,
     var age: Float,
     var isMale: Boolean,
-    var ailyActivity: Int
+    var dailyActivity: Int
 )
