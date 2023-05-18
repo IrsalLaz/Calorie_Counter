@@ -1,20 +1,21 @@
 package org.lazlab.caloriecounter.ui.calculate
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import org.lazlab.caloriecounter.BmiActivity
 import org.lazlab.caloriecounter.R
 import org.lazlab.caloriecounter.databinding.FragmentCalculateBinding
 import org.lazlab.caloriecounter.db.PersonDb
+import org.lazlab.caloriecounter.model.Category
+import org.lazlab.caloriecounter.model.Results
 
 class CalculateFragment : Fragment() {
 
@@ -24,6 +25,8 @@ class CalculateFragment : Fragment() {
         val db = PersonDb.getInstance(requireContext())
         val factory = CalculateViewModelFactory(db.dao)
         ViewModelProvider(this, factory)[CalculateViewModel::class.java]
+
+//        ViewModelProvider(this)[CalculateViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -33,71 +36,101 @@ class CalculateFragment : Fragment() {
     ): View? {
 
         binding = FragmentCalculateBinding.inflate(layoutInflater, container, false)
+        setHasOptionsMenu(true)
         return binding.root
 
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding = FragmentCalculateBinding.inflate(layoutInflater)
+
+        //calculate BMI & BMR
         binding.calculateButton.setOnClickListener { calculate() }
+
+        //get BMI & BMR Score
+        viewModel.getBmiBmrScore().observe(requireActivity()) { showBmiResult(it) }
+
+        //clear form
         binding.clearButton.setOnClickListener { clearInput() }
 
+    }
 
+    private fun showBmiResult(result: Results?) {
+        binding.result.visibility = View.VISIBLE
+
+        if (result == null) return
+        binding.categoryTextView.text =
+            getString(R.string.category_x, getCategoryLabel(result.category))
+        binding.scoreTextView.text = getString(R.string.bmi_x, result.bmi)
+        binding.calorieTextView.text = getString(R.string.bmr_x, result.bmr)
+    }
+
+    private fun getCategoryLabel(category: Category): String {
+        //convert from Category to string
+        val stringRes = when (category) {
+            Category.KURUS -> R.string.underweight
+            Category.IDEAL -> R.string.ideal
+            Category.GEMUK -> R.string.overweight
+            Category.OBESITAS -> R.string.obese
+        }
+        return getString(stringRes)
     }
 
 
     private fun calculate() {
-        val weight = binding.weightInput.text.toString()
-        if (TextUtils.isEmpty(weight)) {
-            Toast.makeText(requireContext(), R.string.weight_invalid, Toast.LENGTH_LONG).show()
+
+        Log.e("SEEME", "calculate done")
+
+        val age = binding.ageInput.text.toString()
+        if (TextUtils.isEmpty(age)) {
+            Toast.makeText(context, R.string.age_invalid, Toast.LENGTH_LONG).show()
             return
         }
 
         val height = binding.heightInput.text.toString()
         if (TextUtils.isEmpty(height)) {
-            Toast.makeText(requireContext(), R.string.height_invalid, Toast.LENGTH_LONG).show()
+            Toast.makeText(context, R.string.height_invalid, Toast.LENGTH_LONG).show()
             return
         }
-        val heightCm = height.toFloat() / 100
+
+        val weight = binding.weightInput.text.toString()
+        if (TextUtils.isEmpty(weight)) {
+            Toast.makeText(context, R.string.weight_invalid, Toast.LENGTH_LONG).show()
+            return
+        }
 
         val selectId = binding.genderRadioGroup.checkedRadioButtonId
         if (selectId == -1) {
-            Toast.makeText(requireContext(), R.string.gender_invalid, Toast.LENGTH_LONG).show()
-            return
-        }
-
-        val age = binding.ageInput.text.toString()
-        if (TextUtils.isEmpty(age)) {
-            Toast.makeText(requireContext(), R.string.age_invalid, Toast.LENGTH_LONG).show()
+            Toast.makeText(context, R.string.gender_invalid, Toast.LENGTH_LONG).show()
             return
         }
 
         val selectActivityLevel = binding.activityRadioGroup.checkedRadioButtonId
         if (selectActivityLevel == -1) {
-            Toast.makeText(requireContext(), R.string.activity_invalid, Toast.LENGTH_LONG).show()
+            Toast.makeText(context, R.string.activity_invalid, Toast.LENGTH_LONG).show()
             return
         }
 
-        //CALCULATE BMI
         val isMale = selectId == R.id.manRadioButton
-        val bmi = weight.toFloat() / (heightCm * heightCm)
-        val category = getCategory(bmi, isMale)
 
-        //store & send score & category to bmiActivity
-        val scoreBmi = getString(R.string.bmi_x, bmi)
-        val categoryBmi = getString(R.string.category_x, category)
+        //CALCULATE BMI & BMR
 
-        //CALCULATE BMR
-        val bmr = getBmr(
-            isMale,
+        //unDirect calculate(use Calculate.kt)
+        viewModel.calculate(
             weight.toFloat(),
             height.toFloat(),
             age.toFloat(),
+            isMale,
             dailyActivity(selectActivityLevel)
         )
 
-        val calorieIntake = getString(R.string.bmr_x, bmr)
-        openActivity(scoreBmi, categoryBmi, calorieIntake)
+        //direct calculate
+//        viewModel.calculateBmiBmr(
+//            weight.toFloat(),
+//            height.toFloat(),
+//            age.toFloat(),
+//            isMale,
+//            dailyActivity(selectActivityLevel)
+//        )
     }
 
 

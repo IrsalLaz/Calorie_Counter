@@ -1,6 +1,7 @@
 package org.lazlab.caloriecounter.model
 
-data class BmiScore(
+data class Results(
 val bmi: Float,
+val bmr: Float,
 val category: Category
 )

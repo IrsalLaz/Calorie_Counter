@@ -9,17 +9,15 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.lazlab.caloriecounter.db.PersonDao
 import org.lazlab.caloriecounter.db.PersonEntity
-import org.lazlab.caloriecounter.model.BmiScore
-import org.lazlab.caloriecounter.model.BmrScore
-import org.lazlab.caloriecounter.model.calculateBmi
-import org.lazlab.caloriecounter.model.calculateBmr
+import org.lazlab.caloriecounter.model.Category
+import org.lazlab.caloriecounter.model.Results
+import org.lazlab.caloriecounter.model.calculateBmiBmr
 
 class CalculateViewModel(private val db: PersonDao) : ViewModel() {
-    private val scoreBmi = MutableLiveData<BmiScore?>()
-    private val scoreBmr = MutableLiveData<BmrScore?>()
+    private val scoreBmiBmr = MutableLiveData<Results?>()
 
-    fun calculate(weight: Float, height: Float, age: Float, isMale: Boolean, dailyActivity: Int) {
-        val dataBmi = PersonEntity(
+    fun calculate(weight: Float, height: Float, age: Float, isMale: Boolean, dailyActivity: Float) {
+        val dataPerson = PersonEntity(
             weight = weight,
             height = height,
             age = age,
@@ -28,18 +26,55 @@ class CalculateViewModel(private val db: PersonDao) : ViewModel() {
         )
 
         //calculate BMR & BMI score value
-        scoreBmi.value = dataBmi.calculateBmi()
-        scoreBmr.value = dataBmi.calculateBmr()
+        scoreBmiBmr.value = dataPerson.calculateBmiBmr()
 
         //insert data to DB
         viewModelScope.launch {
             withContext(Dispatchers.IO) {
-                db.insert(dataBmi)
+                db.insert(dataPerson)
             }
         }
     }
 
-    fun getBmiScore(): LiveData<BmiScore?>   = scoreBmi
-    fun getBmrScore(): LiveData<BmrScore?> = scoreBmr
+    fun calculateBmiBmr(
+        weight: Float,
+        height: Float,
+        age: Float,
+        isMale: Boolean,
+        dailyActivity: Float
+    ) {
+        //calculate BMI
+        val heightCm = height / 100
+        val bmi = weight / (heightCm * heightCm)
+        val category = getCategory(bmi, isMale)
+
+        //calculate BMR
+        val bmr: Float = if (isMale) {
+            ((88.4f + 13.4f * weight) + (4.8f * height) - (5.68f * age)) * dailyActivity
+        } else {
+            ((447.6f + 9.25f * weight) + (3.10f * height) - (4.33f * age)) * dailyActivity
+        }
+
+        scoreBmiBmr.value = Results(bmi, bmr, category)
+    }
+
+    private fun getCategory(bmi: Float, isMale: Boolean): Category {
+        val category = if (isMale) {
+            when {
+                bmi < 20.5 -> Category.KURUS
+                bmi >= 27.0 -> Category.GEMUK
+                else -> Category.IDEAL
+            }
+        } else {
+            when {
+                bmi < 18.5 -> Category.KURUS
+                bmi >= 25.0 -> Category.GEMUK
+                else -> Category.IDEAL
+            }
+        }
+        return category
+    }
+
+    fun getBmiBmrScore(): LiveData<Results?> = scoreBmiBmr
 
 }

@@ -12,10 +12,12 @@
     <string name="man">Pria</string>
     <string name="woman">Wanita</string>
     <string name="score">BMI: 20</string>
+
     <string name="underweight">Kurus</string>
     <string name="ideal">Ideal</string>
     <string name="overweight">Gemuk</string>
     <string name="obese">Obesitas</string>
+
     <string name="age_invalid">Usia tidak boleh kosong</string>
     <string name="weight_invalid">Berat tidak boleh kosong</string>
     <string name="height_invalid">Tinggi tidak boleh kosong</string>
@@ -24,7 +26,7 @@
 
     <string name="bmi_x">BMI: %1$.2f</string>
     <string name="category_x">Kategori: %1$s</string>
-    <string name="bmr_x">%1$.6s kalori</string>
+    <string name="bmr_x">%1$.6f kalori</string>
 
     <string name="mealName">Nama Makanan</string>
     <string name="mealMacro">500 kalori</string>

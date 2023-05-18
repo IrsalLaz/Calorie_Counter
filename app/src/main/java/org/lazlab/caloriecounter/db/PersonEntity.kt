@@ -12,5 +12,5 @@ data class PersonEntity(
     var height: Float,
     var age: Float,
     var isMale: Boolean,
-    var dailyActivity: Int
+    var dailyActivity: Float
 )
