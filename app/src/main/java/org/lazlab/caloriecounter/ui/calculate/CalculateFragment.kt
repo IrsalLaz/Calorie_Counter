@@ -1,16 +1,17 @@
 package org.lazlab.caloriecounter.ui.calculate
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
-import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import org.lazlab.caloriecounter.BmiActivity
+import androidx.navigation.fragment.findNavController
 import org.lazlab.caloriecounter.R
 import org.lazlab.caloriecounter.databinding.FragmentCalculateBinding
 import org.lazlab.caloriecounter.db.PersonDb
@@ -36,9 +37,10 @@ class CalculateFragment : Fragment() {
     ): View? {
 
         binding = FragmentCalculateBinding.inflate(layoutInflater, container, false)
-        setHasOptionsMenu(true)
-        return binding.root
 
+        setHasOptionsMenu(true)
+
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -52,33 +54,37 @@ class CalculateFragment : Fragment() {
         //clear form
         binding.clearButton.setOnClickListener { clearInput() }
 
-    }
+        //TODO: send result to Result Fragment
 
-    private fun showBmiResult(result: Results?) {
-        binding.result.visibility = View.VISIBLE
-
-        if (result == null) return
-        binding.categoryTextView.text =
-            getString(R.string.category_x, getCategoryLabel(result.category))
-        binding.scoreTextView.text = getString(R.string.bmi_x, result.bmi)
-        binding.calorieTextView.text = getString(R.string.bmr_x, result.bmr)
-    }
-
-    private fun getCategoryLabel(category: Category): String {
-        //convert from Category to string
-        val stringRes = when (category) {
-            Category.KURUS -> R.string.underweight
-            Category.IDEAL -> R.string.ideal
-            Category.GEMUK -> R.string.overweight
-            Category.OBESITAS -> R.string.obese
+        //goto result fragment
+        binding.navigateButton.setOnClickListener {
+//            it.findNavController().navigate(R.id.action_calculateFragment_to_resultsFragment)
+//            it.findNavController().navigate(R.id.action_calculateFragment_to_historyFragment)
+//            it.findNavController().navigate(R.id.action_calculateFragment_to_mealsFragment)
         }
-        return getString(stringRes)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater.inflate(R.menu.menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_history -> {
+                findNavController().navigate(R.id.action_calculateFragment_to_historyFragment)
+                return true
+            }
+
+            R.id.menu_about -> {
+                findNavController().navigate(R.id.action_calculateFragment_to_infoFragment)
+                return true
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 
     private fun calculate() {
-
-        Log.e("SEEME", "calculate done")
 
         val age = binding.ageInput.text.toString()
         if (TextUtils.isEmpty(age)) {
@@ -123,48 +129,27 @@ class CalculateFragment : Fragment() {
             dailyActivity(selectActivityLevel)
         )
 
-        //direct calculate
-//        viewModel.calculateBmiBmr(
-//            weight.toFloat(),
-//            height.toFloat(),
-//            age.toFloat(),
-//            isMale,
-//            dailyActivity(selectActivityLevel)
-//        )
+        // TODO: send result data
+
     }
 
+    private fun showBmiResult(result: Results?) {
+        binding.result.visibility = View.VISIBLE
 
-    private fun getBmr(
-        isMale: Boolean,
-        weight: Float,
-        height: Float,
-        age: Float,
-        dailyActivity: Float
-    ): String {
-        val bmr: Float = if (isMale) {
-            ((88.4f + 13.4f * weight) + (4.8f * height) - (5.68f * age)) * dailyActivity
-        } else {
-            ((447.6f + 9.25f * weight) + (3.10f * height) - (4.33f * age)) * dailyActivity
-        }
-
-        return bmr.toString()
+        if (result == null) return
+        binding.categoryTextView.text =
+            getString(R.string.category_x, getCategoryLabel(result.category))
+        binding.scoreTextView.text = getString(R.string.bmi_x, result.bmi)
+        binding.calorieTextView.text = getString(R.string.bmr_x, result.bmr)
     }
 
-    private fun getCategory(bmi: Float, isMale: Boolean): String {
-        val stringRes = if (isMale) {
-            when {
-                bmi < 18.5 -> R.string.underweight
-                bmi >= 27.0 -> R.string.overweight
-                bmi >= 30.0 -> R.string.obese
-                else -> R.string.ideal
-            }
-        } else {
-            when {
-                bmi < 18.5 -> R.string.underweight
-                bmi >= 25.0 -> R.string.overweight
-                bmi >= 31.0 -> R.string.obese
-                else -> R.string.ideal
-            }
+    private fun getCategoryLabel(category: Category): String {
+        //convert from Category to string
+        val stringRes = when (category) {
+            Category.KURUS -> R.string.underweight
+            Category.IDEAL -> R.string.ideal
+            Category.GEMUK -> R.string.overweight
+            Category.OBESITAS -> R.string.obese
         }
         return getString(stringRes)
     }
@@ -195,12 +180,4 @@ class CalculateFragment : Fragment() {
         binding.activityRadioGroup.clearCheck()
     }
 
-    private fun openActivity(score: String, category: String, calorie: String) {
-        val intent = Intent(requireContext(), BmiActivity::class.java).also {
-            it.putExtra("EXTRA_SCORE", score)
-            it.putExtra("EXTRA_CATEGORY", category)
-            it.putExtra("EXTRA_CALORIE", calorie)
-            startActivity(it)
-        }
-    }
 }

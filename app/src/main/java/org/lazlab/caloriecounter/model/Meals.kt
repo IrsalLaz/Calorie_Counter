@@ -1,4 +1,4 @@
-package org.lazlab.caloriecounter
+package org.lazlab.caloriecounter.model
 
 class Meals(
     val name: String,

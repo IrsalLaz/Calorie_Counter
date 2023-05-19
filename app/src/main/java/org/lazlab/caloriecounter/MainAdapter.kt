@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import org.lazlab.caloriecounter.databinding.ListMealsBinding
+import org.lazlab.caloriecounter.model.Meals
 
 class MainAdapter(private val data: List<Meals>) :
     RecyclerView.Adapter<MainAdapter.ViewHolder>(){

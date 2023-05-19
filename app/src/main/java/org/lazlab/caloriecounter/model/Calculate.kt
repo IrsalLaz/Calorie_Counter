@@ -1,6 +1,5 @@
 package org.lazlab.caloriecounter.model
 
-import org.lazlab.caloriecounter.R
 import org.lazlab.caloriecounter.db.PersonEntity
 
 //calculate bmi and bmr score
@@ -19,6 +18,7 @@ fun PersonEntity.calculateBmiBmr(): Results {
 
     return Results(bmi, bmr, category)
 }
+
 
 private fun getCategory(bmi: Float, isMale: Boolean): Category {
     val category = if (isMale) {

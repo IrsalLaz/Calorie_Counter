@@ -26,7 +26,7 @@
 
     <string name="bmi_x">BMI: %1$.2f</string>
     <string name="category_x">Kategori: %1$s</string>
-    <string name="bmr_x">%1$.6f kalori</string>
+    <string name="bmr_x">%1$.2f kalori</string>
 
     <string name="mealName">Nama Makanan</string>
     <string name="mealMacro">500 kalori</string>
@@ -42,5 +42,26 @@
     <string name="intro">Skor BMI Kamu</string>
     <string name="introCalorie">Kebutuhan Kalori Kamu</string>
     <string name="recommendations">Rekomendasi Menu Makanan</string>
+
+    <string name="empty_data">Oops there is nothing here</string>
+    <string name="category_history">I</string>
+
+    <string name="history">History</string>
+
+    <string name="meal_name">Meal Name</string>
+    <string name="meal_calorie">Total Calorie</string>
+    <string name="add_meal">Add Meal</string>
+
+    <string name="date">12 June 2023</string>
+    <string name="call_us">Contact us</string>
+    <string name="info_app">Aplikasi Calorie Counter V2 memiliki fungsi yang sangat berguna dalam mengelola pola makan dan memantau kebutuhan kalori pengguna. Dengan menggunakan aplikasi ini, pengguna dapat menghitung Body Mass Index (BMI) dan Metabolic Rate Basal (BMR) mereka untuk menentukan jumlah kalori yang diperlukan.
+
+Selain itu, Calorie Counter V2 juga menyediakan rekomendasi makanan sehat yang dapat dicoba oleh pengguna, lengkap dengan informasi kalori yang terkandung di dalamnya. Fitur baru pada versi ini memungkinkan pengguna untuk menambahkan variasi makanan ke dalam daftar, dengan memasukkan nama makanan, jumlah kalori, dan bahkan dapat melampirkan gambar makanannya.
+
+Dengan demikian, aplikasi ini memberikan kemudahan dan fleksibilitas bagi pengguna dalam mengelola asupan kalori mereka sehari-hari.</string>
+
+
+    <string name="info">About Application</string>
+
 
 </resources>
