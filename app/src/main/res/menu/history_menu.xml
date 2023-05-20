@@ -3,6 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menu_switch"
+        android:icon="@drawable/ic_grid_view"
+        android:title="@string/history"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/menu_delete"
         android:icon="@drawable/ic_delete"
         android:title="@string/delete"

@@ -7,8 +7,11 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.lazlab.caloriecounter.R
 import org.lazlab.caloriecounter.databinding.FragmentHistoryBinding
@@ -24,6 +27,7 @@ class HistoryFragment : Fragment() {
 
     private lateinit var binding: FragmentHistoryBinding
     private lateinit var myAdapter: HistoryAdapter
+    private var isLinearLayout = true
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,15 +56,42 @@ class HistoryFragment : Fragment() {
         }
     }
 
+    private fun setLayout() {
+        binding.recyclerView.layoutManager = if (isLinearLayout)
+            LinearLayoutManager(context)
+        else
+            GridLayoutManager(context, 2)
+    }
+
+    private fun setIcon(menuItem: MenuItem) {
+        val iconId = if (isLinearLayout)
+            R.drawable.ic_grid_view
+        else
+            R.drawable.ic_view_list
+        menuItem.icon = ContextCompat.getDrawable(requireContext(), iconId)
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        super.onCreateOptionsMenu(menu, inflater)
+//        super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.history_menu, menu)
+
+        val menuItem = menu.findItem(R.id.menu_switch)
+        setIcon(menuItem)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_delete) {
-            deleteData()
-            return true
+        when (item.itemId) {
+            R.id.menu_delete -> {
+                deleteData()
+                return true
+            }
+
+            R.id.menu_switch -> {
+                isLinearLayout = !isLinearLayout
+                setLayout()
+                setIcon(item)
+                return true
+            }
         }
         return super.onOptionsItemSelected(item)
     }

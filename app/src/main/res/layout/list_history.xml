@@ -29,15 +29,18 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/categoryTextView"
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:layout_height="wrap_content"
+            android:text="@string/ideal" />
+
+        <TextView
             android:id="@+id/bmiTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/bmi_x" />
-        <TextView
-            android:id="@+id/categoryTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ideal" />
+
         <TextView
             android:id="@+id/calorieTextView"
             android:layout_width="wrap_content"

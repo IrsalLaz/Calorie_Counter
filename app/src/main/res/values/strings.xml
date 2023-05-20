@@ -27,6 +27,10 @@
     <string name="bmi_x">BMI: %1$.2f</string>
     <string name="category_x">Kategori: %1$s</string>
     <string name="bmr_x">%1$.2f kalori</string>
+    <string name="category_result">BMI Kamu termasuk Kategori %1$s !</string>
+
+    <string name="calorie_info">Kebutuhan kalorimu sebanyak:</string>
+    <string name="suggestion">Kalo kamu butuh rekomendasi makanan sehat yang enak, cobain makanan dibawah yaa!</string>
 
     <string name="mealName">Nama Makanan</string>
     <string name="mealMacro">500 kalori</string>
@@ -66,6 +70,8 @@ Dengan demikian, aplikasi ini memberikan kemudahan dan fleksibilitas bagi penggu
     <string name="delete_confirmation">Hapus semua histori?</string>
     <string name="delete">Hapus</string>
     <string name="cancel">Batal</string>
+
+    <string name="goto_result">Saran Makanan</string>
 
 
 </resources>

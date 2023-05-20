@@ -6,8 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.fragment.navArgs
 import org.lazlab.caloriecounter.MainAdapter
 import org.lazlab.caloriecounter.model.Meals
 import org.lazlab.caloriecounter.R
@@ -17,6 +16,8 @@ import org.lazlab.caloriecounter.model.Category
 class ResultsFragment : Fragment() {
 
     private lateinit var binding: FragmentResultsBinding
+
+    private val args: ResultsFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -37,63 +38,16 @@ class ResultsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
         Log.i("TESTLOG", "Hello onViewCreated reached")
-
-//        val bmi = args.bmi
-//        val bmr = args.bmr
-//        val category = args.category
+//        val bmr = args.calorie
+        val bmr = 9999f
 
         //Show passed data
-//        showBmiResult(bmi, bmr, category)
+        showCalorie(bmr)
     }
 
-
-    private fun showBmiResult(bmi: Float, bmr: Float, category: String) {
-
-        binding.categoryTextView.text =
-            getString(R.string.category_x, category)
-        binding.scoreTextView.text = getString(R.string.bmi_x, bmi)
-        binding.calorieTextView.text = getString(R.string.bmr_x, bmr)
+    private fun showCalorie(bmr: Float?) {
+        binding.resultTextView.text = getString(R.string.bmr_x, bmr)
     }
-
-    private fun getCategoryLabel(category: Category): String {
-        //convert from Category to string
-        val stringRes = when (category) {
-            Category.KURUS -> R.string.underweight
-            Category.IDEAL -> R.string.ideal
-            Category.GEMUK -> R.string.overweight
-            Category.OBESITAS -> R.string.obese
-        }
-        return getString(stringRes)
-    }
-
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        binding = FragmentResultsBinding.inflate(layoutInflater)
-//        setContentView(binding.root)
-//
-//        with(binding.mealRecyclerView){
-//            addItemDecoration(DividerItemDecoration(context, RecyclerView.VERTICAL))
-//            adapter = MainAdapter(getData())
-//            setHasFixedSize(true)
-//        }
-//
-//        val bmiScore =  intent.getStringExtra("EXTRA_SCORE")
-//        val bmiCategory =  intent.getStringExtra("EXTRA_CATEGORY")
-//        val calorie =  intent.getStringExtra("EXTRA_CALORIE")
-//
-//        binding.scoreTextView.apply {
-//            text = bmiScore
-//        }
-//
-//        binding.categoryTextView.apply {
-//            text = bmiCategory
-//        }
-//
-//        binding.calorieTextView.apply {
-//            text = calorie
-//        }
-//
-//    }
 
     private fun getMealsData(): List<Meals> {
         return listOf(

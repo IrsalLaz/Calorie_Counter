@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@id/scoreTextView" />
 
     <TextView
-        android:id="@+id/calorieTextView"
+        android:id="@+id/resultTextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -58,7 +58,7 @@
         android:text="@string/recommendations"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/calorieTextView" />
+        app:layout_constraintTop_toBottomOf="@id/resultTextView" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@id/mealRecyclerView"

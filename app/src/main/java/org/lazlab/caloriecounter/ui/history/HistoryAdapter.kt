@@ -6,10 +6,12 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import org.lazlab.caloriecounter.R
 import org.lazlab.caloriecounter.databinding.ListHistoryBinding
 import org.lazlab.caloriecounter.db.PersonEntity
+import org.lazlab.caloriecounter.model.Category
 import org.lazlab.caloriecounter.model.calculateBmiBmr
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -45,11 +47,23 @@ class HistoryAdapter :
 
         fun bind(item: PersonEntity) = with(binding) {
             val results = item.calculateBmiBmr()
-            categoryTextView.text = results.category.toString().subSequence(0, 1)
+            categoryIcon.text = results.category.toString().subSequence(0, 1)
 
-            bmiTextView.text = results.bmi.toString()
+            val colorRes = when (results.category) {
+                Category.KURUS -> R.color.underweight
+                Category.IDEAL -> R.color.ideal
+                Category.GEMUK -> R.color.overweight
+                else -> R.color.obese
+            }
 
-            calorieTextView.text = results.bmr.toString()
+            categoryTextView.text = results.category.toString()
+
+            val circleBg = categoryIcon.background as GradientDrawable
+            circleBg.setColor(ContextCompat.getColor(root.context, colorRes))
+
+            bmiTextView.text = root.context.getString(R.string.bmi_x, results.bmi)
+
+            calorieTextView.text = root.context.getString(R.string.bmr_x, results.bmr)
 
             dateTextView.text = dateFormatter.format((Date(item.date)))
         }

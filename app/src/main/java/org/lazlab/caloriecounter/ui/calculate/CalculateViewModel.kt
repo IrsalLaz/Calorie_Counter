@@ -15,7 +15,9 @@ import org.lazlab.caloriecounter.model.calculateBmiBmr
 
 class CalculateViewModel(private val db: PersonDao) : ViewModel() {
     private val scoreBmiBmr = MutableLiveData<Results?>()
-    private val navigate = MutableLiveData<Results?>()
+    private val navigate = MutableLiveData<Float?>()
+
+//    private val navigate = MutableLiveData<Results?>()
 
     fun calculate(weight: Float, height: Float, age: Float, isMale: Boolean, dailyActivity: Float) {
         val dataPerson = PersonEntity(
@@ -39,13 +41,13 @@ class CalculateViewModel(private val db: PersonDao) : ViewModel() {
 
     fun getBmiBmrScore(): LiveData<Results?> = scoreBmiBmr
 
-    fun startNavigate(){
-        navigate.value = scoreBmiBmr.value
+    fun startNavigate() {
+        navigate.value = scoreBmiBmr.value?.bmr
     }
 
-    fun endNavigate(){
+    fun endNavigate() {
         navigate.value = null
     }
 
-    fun getNavigate(): LiveData<Results?> = navigate
+    fun getNavigate(): MutableLiveData<Float?> = navigate
 }

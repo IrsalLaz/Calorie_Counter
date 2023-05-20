@@ -26,15 +26,13 @@ class CalculateFragment : Fragment() {
         val db = PersonDb.getInstance(requireContext())
         val factory = CalculateViewModelFactory(db.dao)
         ViewModelProvider(this, factory)[CalculateViewModel::class.java]
-
-//        ViewModelProvider(this)[CalculateViewModel::class.java]
     }
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentCalculateBinding.inflate(layoutInflater, container, false)
 
@@ -48,20 +46,28 @@ class CalculateFragment : Fragment() {
         //calculate BMI & BMR
         binding.calculateButton.setOnClickListener { calculate() }
 
+        //send result to Result Fragment
+        binding.navigateButton.setOnClickListener{viewModel.startNavigate()}
+
         //get BMI & BMR Score
         viewModel.getBmiBmrScore().observe(requireActivity()) { showBmiResult(it) }
+
+        //retrieve data
+        val dataResult = viewModel.getBmiBmrScore()
+        val bmrData = dataResult.value?.bmr
+
+        //get calorie intake value
+        viewModel.getNavigate().observe(viewLifecycleOwner) {
+            if (bmrData == null) return@observe
+            findNavController().navigate(
+                CalculateFragmentDirections.actionCalculateFragmentToResultsFragment(bmrData)
+            )
+            viewModel.endNavigate()
+        }
 
         //clear form
         binding.clearButton.setOnClickListener { clearInput() }
 
-        //TODO: send result to Result Fragment
-
-        //goto result fragment
-        binding.navigateButton.setOnClickListener {
-//            it.findNavController().navigate(R.id.action_calculateFragment_to_resultsFragment)
-//            it.findNavController().navigate(R.id.action_calculateFragment_to_historyFragment)
-//            it.findNavController().navigate(R.id.action_calculateFragment_to_mealsFragment)
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -129,8 +135,6 @@ class CalculateFragment : Fragment() {
             dailyActivity(selectActivityLevel)
         )
 
-        // TODO: send result data
-
     }
 
     private fun showBmiResult(result: Results?) {
@@ -141,6 +145,8 @@ class CalculateFragment : Fragment() {
             getString(R.string.category_x, getCategoryLabel(result.category))
         binding.scoreTextView.text = getString(R.string.bmi_x, result.bmi)
         binding.calorieTextView.text = getString(R.string.bmr_x, result.bmr)
+
+        binding.navigateButton.visibility = View.VISIBLE
     }
 
     private fun getCategoryLabel(category: Category): String {
