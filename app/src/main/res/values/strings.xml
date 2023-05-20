@@ -63,5 +63,9 @@ Dengan demikian, aplikasi ini memberikan kemudahan dan fleksibilitas bagi penggu
 
     <string name="info">About Application</string>
 
+    <string name="delete_confirmation">Hapus semua histori?</string>
+    <string name="delete">Hapus</string>
+    <string name="cancel">Batal</string>
+
 
 </resources>

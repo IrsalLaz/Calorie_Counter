@@ -12,9 +12,11 @@ import org.lazlab.caloriecounter.databinding.ListHistoryBinding
 import org.lazlab.caloriecounter.db.PersonEntity
 import org.lazlab.caloriecounter.model.calculateBmiBmr
 import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
-class HistoryAdapter : ListAdapter<PersonEntity, ViewHolder>(DIFF_CALLBACK) {
+class HistoryAdapter :
+    ListAdapter<PersonEntity, HistoryAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     companion object {
         private val DIFF_CALLBACK =
@@ -38,15 +40,18 @@ class HistoryAdapter : ListAdapter<PersonEntity, ViewHolder>(DIFF_CALLBACK) {
         private val binding: ListHistoryBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        private val dateFormatter = SimpleDateFormat("dd MMMM yyyy", Locale("id", "ID"))
+        private val dateFormatter =
+            SimpleDateFormat("dd MMMM yyyy", Locale("id", "ID"))
 
-        fun bind(item: PersonEntity) = with(binding){
+        fun bind(item: PersonEntity) = with(binding) {
             val results = item.calculateBmiBmr()
             categoryTextView.text = results.category.toString().subSequence(0, 1)
 
             bmiTextView.text = results.bmi.toString()
 
             calorieTextView.text = results.bmr.toString()
+
+            dateTextView.text = dateFormatter.format((Date(item.date)))
         }
     }
 
@@ -56,8 +61,8 @@ class HistoryAdapter : ListAdapter<PersonEntity, ViewHolder>(DIFF_CALLBACK) {
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        TODO("Not yet implemented")
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        holder.bind(getItem(position))
     }
 
 }
