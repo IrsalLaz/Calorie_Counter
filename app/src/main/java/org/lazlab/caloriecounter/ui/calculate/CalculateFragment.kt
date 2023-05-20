@@ -46,21 +46,16 @@ class CalculateFragment : Fragment() {
         //calculate BMI & BMR
         binding.calculateButton.setOnClickListener { calculate() }
 
-        //send result to Result Fragment
-        binding.navigateButton.setOnClickListener{viewModel.startNavigate()}
-
         //get BMI & BMR Score
         viewModel.getBmiBmrScore().observe(requireActivity()) { showBmiResult(it) }
 
-        //retrieve data
-        val dataResult = viewModel.getBmiBmrScore()
-        val bmrData = dataResult.value?.bmr
+        //send result to Result Fragment
+        binding.suggestionButton.setOnClickListener { viewModel.startNavigate() }
 
-        //get calorie intake value
         viewModel.getNavigate().observe(viewLifecycleOwner) {
-            if (bmrData == null) return@observe
+            if (it == null) return@observe
             findNavController().navigate(
-                CalculateFragmentDirections.actionCalculateFragmentToResultsFragment(bmrData)
+                CalculateFragmentDirections.actionCalculateFragmentToResultsFragment(it)
             )
             viewModel.endNavigate()
         }
@@ -134,7 +129,6 @@ class CalculateFragment : Fragment() {
             isMale,
             dailyActivity(selectActivityLevel)
         )
-
     }
 
     private fun showBmiResult(result: Results?) {
@@ -146,7 +140,7 @@ class CalculateFragment : Fragment() {
         binding.scoreTextView.text = getString(R.string.bmi_x, result.bmi)
         binding.calorieTextView.text = getString(R.string.bmr_x, result.bmr)
 
-        binding.navigateButton.visibility = View.VISIBLE
+        binding.suggestionButton.visibility = View.VISIBLE
     }
 
     private fun getCategoryLabel(category: Category): String {

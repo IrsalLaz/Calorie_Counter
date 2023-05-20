@@ -147,38 +147,33 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="16dp"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/clearButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:text="@string/reset" />
-
-            <Button
-                android:id="@+id/calculateButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="8dp"
-                android:text="@string/calculate" />
-        </LinearLayout>
+        android:orientation="horizontal">
 
         <Button
-            android:id="@+id/navigateButton"
-            android:layout_width="match_parent"
-            android:visibility="invisible"
+            android:id="@+id/clearButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="?attr/colorTertiary"
             android:layout_marginHorizontal="8dp"
-            android:text="@string/goto_result" />
+            android:text="@string/reset" />
 
+        <Button
+            android:id="@+id/calculateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:text="@string/calculate" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/suggestionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="8dp"
+        android:backgroundTint="?attr/colorTertiary"
+        android:text="@string/goto_result"
+        android:visibility="visible" />
+
 
     <LinearLayout
         android:id="@+id/result"

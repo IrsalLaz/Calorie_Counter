@@ -1,7 +1,6 @@
 package org.lazlab.caloriecounter.ui.results
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -23,7 +22,7 @@ class ResultsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
 
         binding = FragmentResultsBinding.inflate(layoutInflater, container, false)
 
@@ -37,16 +36,24 @@ class ResultsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-        Log.i("TESTLOG", "Hello onViewCreated reached")
-//        val bmr = args.calorie
-        val bmr = 9999f
 
         //Show passed data
-        showCalorie(bmr)
+        showCalorie(categorie = getCategoryLabel(args.categories))
     }
 
-    private fun showCalorie(bmr: Float?) {
-        binding.resultTextView.text = getString(R.string.bmr_x, bmr)
+    private fun showCalorie(categorie: String?) {
+        binding.resultTextView.text = getString(R.string.category_x, categorie)
+    }
+
+    private fun getCategoryLabel(category: Category): String {
+        //convert from Category to string
+        val stringRes = when (category) {
+            Category.KURUS -> R.string.underweight
+            Category.IDEAL -> R.string.ideal
+            Category.GEMUK -> R.string.overweight
+            Category.OBESITAS -> R.string.obese
+        }
+        return getString(stringRes)
     }
 
     private fun getMealsData(): List<Meals> {

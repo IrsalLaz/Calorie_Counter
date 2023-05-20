@@ -8,16 +8,13 @@
     <fragment
         android:id="@+id/calculateFragment"
         android:name="org.lazlab.caloriecounter.ui.calculate.CalculateFragment"
-        android:label="Calculate Your ">
+        android:label="Know Your BMI and BMR">
         <action
             android:id="@+id/action_calculateFragment_to_resultsFragment"
             app:destination="@id/resultsFragment" />
         <action
             android:id="@+id/action_calculateFragment_to_historyFragment"
             app:destination="@id/historyFragment" />
-        <action
-            android:id="@+id/action_calculateFragment_to_mealsFragment"
-            app:destination="@id/mealsFragment" />
         <action
             android:id="@+id/action_calculateFragment_to_infoFragment"
             app:destination="@id/infoFragment" />
@@ -28,17 +25,13 @@
         android:label="Food Recomendation"
         tools:layout="@layout/activity_bmi">
         <argument
-            android:name="calorie"
-            app:argType="float" />
+            android:name="categories"
+            app:argType="org.lazlab.caloriecounter.model.Category" />
     </fragment>
     <fragment
         android:id="@+id/historyFragment"
         android:name="org.lazlab.caloriecounter.ui.history.HistoryFragment"
         android:label="History Log" />
-    <fragment
-        android:id="@+id/mealsFragment"
-        android:name="org.lazlab.caloriecounter.ui.meal.MealsFragment"
-        android:label="MealsFragment" />
     <fragment
         android:id="@+id/infoFragment"
         android:name="org.lazlab.caloriecounter.ui.info.InfoFragment"
