@@ -10,14 +10,23 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.launch
 import org.lazlab.caloriecounter.R
+import org.lazlab.caloriecounter.data.SettingsDataStore
+import org.lazlab.caloriecounter.data.dataStore
 import org.lazlab.caloriecounter.databinding.FragmentHistoryBinding
 import org.lazlab.caloriecounter.db.PersonDb
 
 class HistoryFragment : Fragment() {
+
+    private val layoutDataStore: SettingsDataStore by lazy {
+        SettingsDataStore(requireContext().dataStore)
+    }
 
     private val viewModel: HistoryViewModel by lazy {
         val db = PersonDb.getInstance(requireContext())
@@ -43,6 +52,7 @@ class HistoryFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+
         myAdapter = HistoryAdapter()
         with(binding.recyclerView) {
             adapter = myAdapter
@@ -53,6 +63,12 @@ class HistoryFragment : Fragment() {
             binding.emptyView.visibility = if (it.isEmpty())
                 View.VISIBLE else View.GONE
             myAdapter.submitList(it)
+        }
+
+        layoutDataStore.preferenceFlow.asLiveData().observe(viewLifecycleOwner) {
+            isLinearLayout = it
+            setLayout()
+            activity?.invalidateOptionsMenu()
         }
     }
 
@@ -87,9 +103,9 @@ class HistoryFragment : Fragment() {
             }
 
             R.id.menu_switch -> {
-                isLinearLayout = !isLinearLayout
-                setLayout()
-                setIcon(item)
+                lifecycleScope.launch {
+                    layoutDataStore.saveLayout(!isLinearLayout, requireContext())
+                }
                 return true
             }
         }
