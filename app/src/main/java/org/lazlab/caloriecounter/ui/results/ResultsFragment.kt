@@ -5,18 +5,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
 import org.lazlab.caloriecounter.MainAdapter
-import org.lazlab.caloriecounter.model.Meals
 import org.lazlab.caloriecounter.R
 import org.lazlab.caloriecounter.databinding.FragmentResultsBinding
 import org.lazlab.caloriecounter.model.Category
+import org.lazlab.caloriecounter.network.ApiStatus
 
 class ResultsFragment : Fragment() {
 
     private lateinit var binding: FragmentResultsBinding
 
+    private lateinit var myAdapter: MainAdapter
+
     private val args: ResultsFragmentArgs by navArgs()
+
+    private val viewModel: ResultViewModel by lazy {
+        ViewModelProvider(this)[ResultViewModel::class.java]
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,7 +35,7 @@ class ResultsFragment : Fragment() {
 
         //set recyclerView
         with(binding.mealRecyclerView) {
-            adapter = MainAdapter(getMealsData())
+            adapter = MainAdapter()
             setHasFixedSize(true)
         }
         return binding.root
@@ -36,9 +43,16 @@ class ResultsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
-
         //Show passed data
         showCalorie(categorie = getCategoryLabel(args.categories))
+
+        //problem here
+//        viewModel.getData().observe(viewLifecycleOwner) {
+//            myAdapter.updateData(it)
+//        }
+//        viewModel.getStatus().observe(viewLifecycleOwner) {
+//            updateProgress(it)
+//        }
     }
 
     private fun showCalorie(categorie: String?) {
@@ -56,16 +70,33 @@ class ResultsFragment : Fragment() {
         return getString(stringRes)
     }
 
-    private fun getMealsData(): List<Meals> {
-        return listOf(
-            Meals("Gado-gado:", 300.0, R.mipmap.gadogado),
-            Meals("Nasi goreng sayuran", 400.0, R.mipmap.nasigoreng),
-            Meals("Pepes ikan", 400.0, R.mipmap.pepesikan),
-            Meals("Sayur lodeh", 250.0, R.mipmap.sayurlodeh),
-            Meals("Sate ayam", 300.0, R.mipmap.sateayam),
-            Meals("Soto ayam", 300.0, R.mipmap.sotoayam),
-            Meals("Sayur asam", 150.0, R.mipmap.sayurasem),
-            Meals("Bubur ayam", 300.0, R.mipmap.buburayam),
-        )
+    private fun updateProgress(status: ApiStatus) {
+        when (status) {
+            ApiStatus.LOADING -> {
+                binding.progressBar.visibility = View.VISIBLE
+            }
+
+            ApiStatus.SUCCESS -> {
+                binding.progressBar.visibility = View.GONE
+            }
+
+            ApiStatus.FAILED -> {
+                binding.progressBar.visibility = View.GONE
+                binding.networkError.visibility = View.VISIBLE
+            }
+        }
     }
+
+//    private fun getMealsData(): List<Meals> {
+//        return listOf(
+//            Meals("Gado-gado:", 300.0, R.mipmap.gadogado),
+//            Meals("Nasi goreng sayuran", 400.0, R.mipmap.nasigoreng),
+//            Meals("Pepes ikan", 400.0, R.mipmap.pepesikan),
+//            Meals("Sayur lodeh", 250.0, R.mipmap.sayurlodeh),
+//            Meals("Sate ayam", 300.0, R.mipmap.sateayam),
+//            Meals("Soto ayam", 300.0, R.mipmap.sotoayam),
+//            Meals("Sayur asam", 150.0, R.mipmap.sayurasem),
+//            Meals("Bubur ayam", 300.0, R.mipmap.buburayam),
+//        )
+//    }
 }

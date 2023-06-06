@@ -172,7 +172,7 @@
         android:layout_marginHorizontal="8dp"
         android:backgroundTint="?attr/colorTertiary"
         android:text="@string/goto_result"
-        android:visibility="visible" />
+        android:visibility="invisible" />
 
 
     <LinearLayout

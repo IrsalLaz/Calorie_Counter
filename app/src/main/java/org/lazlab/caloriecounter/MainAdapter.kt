@@ -3,18 +3,32 @@ package org.lazlab.caloriecounter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import org.lazlab.caloriecounter.databinding.ListMealsBinding
 import org.lazlab.caloriecounter.model.Meals
+import org.lazlab.caloriecounter.network.MealsApi
 
-class MainAdapter(private val data: List<Meals>) :
-    RecyclerView.Adapter<MainAdapter.ViewHolder>(){
+class MainAdapter() : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
+
+    private val data = mutableListOf<Meals>()
+
+    fun updateData(newData: List<Meals>)
+    {
+        data.clear()
+        data.addAll(newData)
+        notifyDataSetChanged()
+    }
+
     class ViewHolder(
         private val binding: ListMealsBinding
-    ) : RecyclerView.ViewHolder(binding.root){
-        fun bind(meal: Meals) = with(binding){
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(meal: Meals) = with(binding) {
             mealNameTextView.text = meal.name
-            calorieTextView.text= meal.calorie.toString()
-            mealImageView.setImageResource(meal.imageResId)
+            calorieTextView.text = meal.calorie.toString()
+            Glide.with(mealImageView.context)
+                .load(MealsApi.getMealUrl(meal.imageResId))
+                .error(R.drawable.ic_broken_image)
+                .into(mealImageView)
         }
     }
 

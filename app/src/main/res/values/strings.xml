@@ -73,5 +73,6 @@ Dengan demikian, aplikasi ini memberikan kemudahan dan fleksibilitas bagi penggu
 
     <string name="goto_result">Saran Makanan</string>
 
+    <string name="koneksi_error">Koneksi error</string>
 
 </resources>
