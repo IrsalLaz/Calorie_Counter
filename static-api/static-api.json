@@ -1,0 +1,10 @@
+[   
+  {"name": "Gado-gado", "calorie": 300, "imageResId": "nasigoreng"},
+  {"name": "Nasi goreng sayuran", "calorie": 400, "imageResId": "gadogado"},
+  {"name": "Pepes ikan", "calorie": 400, "imageResId": "pepesikan"},
+  {"name": "Sayur lodeh", "calorie": 250, "imageResId": "sayurlodeh"},
+  {"name": "Sate ayam", "calorie": 300, "imageResId": "sateayam"},
+  {"name": "Soto ayam", "calorie": 300, "imageResId": "sotoayam"},
+  {"name": "Sayur asam", "calorie": 150, "imageResId": "sayurasem"},
+  {"name": "Bubur ayam", "calorie": 300, "imageResId": "buburayam"},
+]
