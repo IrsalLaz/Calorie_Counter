@@ -1,6 +1,7 @@
 package org.lazlab.caloriecounter.ui.results
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,13 +18,15 @@ class ResultsFragment : Fragment() {
 
     private lateinit var binding: FragmentResultsBinding
 
-    private lateinit var myAdapter: MainAdapter
-
     private val args: ResultsFragmentArgs by navArgs()
 
     private val viewModel: ResultViewModel by lazy {
+        Log.d("MainViewModel", "Success in RFG")
         ViewModelProvider(this)[ResultViewModel::class.java]
     }
+
+    private lateinit var myAdapter: MainAdapter
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,11 +34,14 @@ class ResultsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
+        Log.d("RFG", "onCreateView")
+
         binding = FragmentResultsBinding.inflate(layoutInflater, container, false)
+        myAdapter = MainAdapter()
 
         //set recyclerView
         with(binding.mealRecyclerView) {
-            adapter = MainAdapter()
+            adapter = myAdapter
             setHasFixedSize(true)
         }
         return binding.root
@@ -43,13 +49,16 @@ class ResultsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
 
+        Log.d("RFG", "onViewCreated")
+
         //Show passed data
         showCalorie(categorie = getCategoryLabel(args.categories))
 
-        //problem here
+        //Problem here
 //        viewModel.getData().observe(viewLifecycleOwner) {
 //            myAdapter.updateData(it)
 //        }
+
 //        viewModel.getStatus().observe(viewLifecycleOwner) {
 //            updateProgress(it)
 //        }

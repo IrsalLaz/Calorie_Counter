@@ -2,6 +2,6 @@ package org.lazlab.caloriecounter.model
 
 class Meals(
     val name: String,
-    val calorie: Double,
+    val calorie: Float,
     val imageResId: String
 )

@@ -13,6 +13,7 @@ import org.lazlab.caloriecounter.network.MealsApi
 import java.lang.Exception
 
 class ResultViewModel : ViewModel() {
+
     private val data = MutableLiveData<List<Meals>>()
     private val status = MutableLiveData<ApiStatus>()
 
@@ -26,14 +27,14 @@ class ResultViewModel : ViewModel() {
             try {
                 data.postValue((MealsApi.service.getMeals()))
                 status.postValue(ApiStatus.SUCCESS)
+                Log.d("ResultViewModel", "Success")
             } catch (e: Exception) {
-                Log.d("MainViewModel", "Failure: ${e.message}")
+                Log.d("ResultViewModel", "Failure: ${e.message}")
                 status.postValue(ApiStatus.FAILED)
             }
         }
     }
 
     fun getData(): LiveData<List<Meals>> = data
-
     fun getStatus(): LiveData<ApiStatus> = status
 }
