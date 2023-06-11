@@ -7,8 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
 
-private const val BASE_URL = "https://raw.githubusercontent.com/" +
-        "IrsalLaz/Calorie_Counter/tree/master/static-api"
+private const val BASE_URL = "https://gist.githubusercontent.com/IrsalLaz/e45a9d95f8c517a4a43be2d06ab25257/raw/"
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())

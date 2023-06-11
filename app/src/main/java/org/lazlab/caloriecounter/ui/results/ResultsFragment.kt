@@ -18,15 +18,14 @@ class ResultsFragment : Fragment() {
 
     private lateinit var binding: FragmentResultsBinding
 
+    private lateinit var myAdapter: MainAdapter
+
     private val args: ResultsFragmentArgs by navArgs()
 
     private val viewModel: ResultViewModel by lazy {
         Log.d("MainViewModel", "Success in RFG")
         ViewModelProvider(this)[ResultViewModel::class.java]
     }
-
-    private lateinit var myAdapter: MainAdapter
-
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,24 +43,24 @@ class ResultsFragment : Fragment() {
             adapter = myAdapter
             setHasFixedSize(true)
         }
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        Log.d("RFG", "onViewCreated")
+        super.onViewCreated(view, savedInstanceState)
 
         //Show passed data
         showCalorie(categorie = getCategoryLabel(args.categories))
 
-        //Problem here
-//        viewModel.getData().observe(viewLifecycleOwner) {
-//            myAdapter.updateData(it)
-//        }
+        //PROBLEM HERE : Show meals data
+        viewModel.getData().observe(viewLifecycleOwner) {
+            myAdapter.updateData(it)
+        }
 
-//        viewModel.getStatus().observe(viewLifecycleOwner) {
-//            updateProgress(it)
-//        }
+        viewModel.getStatus().observe(viewLifecycleOwner) {
+            updateProgress(it)
+        }
     }
 
     private fun showCalorie(categorie: String?) {

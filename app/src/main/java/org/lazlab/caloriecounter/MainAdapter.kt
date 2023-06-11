@@ -25,6 +25,8 @@ class MainAdapter() : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
         fun bind(meal: Meals) = with(binding) {
             mealNameTextView.text = meal.name
             calorieTextView.text = meal.calorie.toString()
+
+            //PROBLEM HERE
             Glide.with(mealImageView.context)
                 .load(MealsApi.getMealUrl(meal.imageResId))
                 .error(R.drawable.ic_broken_image)
