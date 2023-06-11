@@ -38,11 +38,13 @@
             android:id="@+id/linkedin_icon"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:contentDescription="@string/linkedin"
             android:src="@drawable/ic_linkedin" />
 
         <ImageView
             android:id="@+id/instagram_icon"
-            android:layout_width="48dp"
+            android:layout_width="46dp"
+            android:contentDescription="@string/instagram"
             android:layout_height="48dp"
             android:layout_marginHorizontal="8dp"
             android:src="@drawable/ic_instagram" />
@@ -51,6 +53,7 @@
             android:id="@+id/github_icon"
             android:layout_width="48dp"
             android:layout_height="48dp"
+            android:contentDescription="@string/git_hub"
             android:src="@drawable/ic_github" />
 
     </LinearLayout>

@@ -1,13 +1,18 @@
 package org.lazlab.caloriecounter.ui.results
 
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import org.lazlab.caloriecounter.MainActivity
 import org.lazlab.caloriecounter.MainAdapter
 import org.lazlab.caloriecounter.R
 import org.lazlab.caloriecounter.databinding.FragmentResultsBinding
@@ -53,7 +58,7 @@ class ResultsFragment : Fragment() {
         //Show passed data
         showCalorie(categorie = getCategoryLabel(args.categories))
 
-        //PROBLEM HERE : Show meals data
+        //Show meals data
         viewModel.getData().observe(viewLifecycleOwner) {
             myAdapter.updateData(it)
         }
@@ -86,6 +91,10 @@ class ResultsFragment : Fragment() {
 
             ApiStatus.SUCCESS -> {
                 binding.progressBar.visibility = View.GONE
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    requestNotificationPermission()
+                }
             }
 
             ApiStatus.FAILED -> {
@@ -95,16 +104,18 @@ class ResultsFragment : Fragment() {
         }
     }
 
-//    private fun getMealsData(): List<Meals> {
-//        return listOf(
-//            Meals("Gado-gado:", 300.0, R.mipmap.gadogado),
-//            Meals("Nasi goreng sayuran", 400.0, R.mipmap.nasigoreng),
-//            Meals("Pepes ikan", 400.0, R.mipmap.pepesikan),
-//            Meals("Sayur lodeh", 250.0, R.mipmap.sayurlodeh),
-//            Meals("Sate ayam", 300.0, R.mipmap.sateayam),
-//            Meals("Soto ayam", 300.0, R.mipmap.sotoayam),
-//            Meals("Sayur asam", 150.0, R.mipmap.sayurasem),
-//            Meals("Bubur ayam", 300.0, R.mipmap.buburayam),
-//        )
-//    }
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
+    private fun requestNotificationPermission() {
+        if (ActivityCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.POST_NOTIFICATIONS
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(android.Manifest.permission.POST_NOTIFICATIONS),
+                MainActivity.PERMISSION_REQUEST_CODE
+            )
+        }
+    }
 }

@@ -73,6 +73,14 @@ Dengan demikian, aplikasi ini memberikan kemudahan dan fleksibilitas bagi penggu
 
     <string name="goto_result">Saran Makanan</string>
 
-    <string name="koneksi_error">Koneksi error</string>
+    <string name="koneksi_error">Koneksi Internet Kamu Terganggu nih :(</string>
+
+    <string name="channel_name">Updater</string>
+    <string name="channel_desc">Update data makanan otomatis</string>
+    <string name="notif_title">Ada Menu Baru Lohh</string>
+    <string name="notif_text">Liat menu makanan sehat baru yuk..</string>
+    <string name="linkedin">linkedIn</string>
+    <string name="instagram">Instagram</string>
+    <string name="git_hub">Git Hub</string>
 
 </resources>

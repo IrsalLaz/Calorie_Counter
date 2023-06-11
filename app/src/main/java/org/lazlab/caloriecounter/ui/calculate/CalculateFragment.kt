@@ -60,6 +60,8 @@ class CalculateFragment : Fragment() {
             viewModel.endNavigate()
         }
 
+        viewModel.scheduleUpdater(requireActivity().application)
+
         //clear form
         binding.clearButton.setOnClickListener { clearInput() }
 
@@ -179,5 +181,4 @@ class CalculateFragment : Fragment() {
         binding.genderRadioGroup.clearCheck()
         binding.activityRadioGroup.clearCheck()
     }
-
 }

@@ -10,7 +10,6 @@ import kotlinx.coroutines.launch
 import org.lazlab.caloriecounter.model.Meals
 import org.lazlab.caloriecounter.network.ApiStatus
 import org.lazlab.caloriecounter.network.MealsApi
-import java.lang.Exception
 
 class ResultViewModel : ViewModel() {
 
