@@ -17,8 +17,6 @@ Catatan:
 * History pengguna juga tersimpan di lokal dan dapat dilihat dengan menekan ikon history/jam di kanan atas.
 
 ## Screenshoot aplikasi
-![image](https://github.com/IrsalLaz/Calorie_Counter/assets/91246036/fe15ffdf-2fc6-4d01-badb-17a4e1878611)
-![image](https://github.com/IrsalLaz/Calorie_Counter/assets/91246036/5755e5fd-ceed-4faa-ba13-2c77cf54c6f1)
-![image](https://github.com/IrsalLaz/Calorie_Counter/assets/91246036/b5733260-11c5-472b-9aba-fce5bf3fc68c)
-![image](https://github.com/IrsalLaz/Calorie_Counter/assets/91246036/1d99dc44-d91d-414f-a588-048d465970f9)
+![image](https://github.com/IrsalLaz/Calorie_Counter/assets/91246036/fe15ffdf-2fc6-4d01-badb-17a4e1878611) ![image](https://github.com/IrsalLaz/Calorie_Counter/assets/91246036/5755e5fd-ceed-4faa-ba13-2c77cf54c6f1)
+![image](https://github.com/IrsalLaz/Calorie_Counter/assets/91246036/b5733260-11c5-472b-9aba-fce5bf3fc68c) ![image](https://github.com/IrsalLaz/Calorie_Counter/assets/91246036/1d99dc44-d91d-414f-a588-048d465970f9)
 ![image](https://github.com/IrsalLaz/Calorie_Counter/assets/91246036/0a5ef66b-9815-45b8-a445-bb3b8229254a)
