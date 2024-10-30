@@ -26,7 +26,7 @@ class MainAdapter() : RecyclerView.Adapter<MainAdapter.ViewHolder>() {
             mealNameTextView.text = meal.name
             calorieTextView.text = meal.calorie.toString()
 
-            //PROBLEM HERE
+            //show image
             Glide.with(mealImageView.context)
                 .load(MealsApi.getMealUrl(meal.imageResId))
                 .error(R.drawable.ic_broken_image)
